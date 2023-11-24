@@ -1,0 +1,117 @@
+/* AppComponent's private CSS styles */
+h1 {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #334953;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
+}
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+.headerClass{
+  color: #0a3961;
+  background: #cacfd5;
+
+}
+
+.demo_wrap {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px dashed green;
+}
+.demo_wrap h1 {
+  padding: 100px;
+  position: relative;
+  z-index: 2;
+  color: #0a2d13;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 300% !important;
+}
+.demo_wrap img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.6;
+}
+.tag{
+  font-family: monospace;
+  font-style: italic;
+}
+.name{
+  font-weight: bolder;
+  color:#0a3961;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.mat-form-field-hide-placeholder .mat-select-placeholder {
+  color:white !important;
+}
+.mat-form-field-infix {
+  background-color: white !important;
+}
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: blue !important;
+}
+
+.sticky {
+  background: #fff;
+  box-shadow: 0 3px 12px 0 rgba(0,0,0,.08);
+  position: fixed;
+  top: 0;
+  height: 120px;
+  width: 100%;
+  z-index: 2;
+}
+.btnOrderSummary{
+  float:right;
+  margin-top:2% !important;
+  background-color: #0a3961;
+  color:white;
+}
+
+.btnLogOut{
+  float:right;
+  margin-top:2% !important;
+  margin-right:1% !important;
+  background-color: #0a3961;
+  color:white;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.btnAdd{
+  float:right;
+}
+.container{
+  background-color: #0a3961;
+  color:white;
+}

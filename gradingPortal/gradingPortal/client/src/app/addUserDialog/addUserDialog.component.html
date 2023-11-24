@@ -1,0 +1,67 @@
+<div>
+    <div *ngIf="data.isEditOrDel!=='edit' && data.isEditOrDel!=='delete'">
+        <b>Add New User</b>
+    </div>
+    <div *ngIf="data.isEditOrDel=='edit'">
+        <b>Edit User</b>
+    </div>
+    
+    <br/>
+    <br/>
+    <form class="example-form" *ngIf="data.isEditOrDel!=='delete'">
+        <mat-form-field class="example-full-width">
+            <mat-label>User Name</mat-label>
+            <input matInput (change)="data.username = $event.target.value" value="{{data.username}}">
+        </mat-form-field>
+        <br/>
+        <mat-form-field *ngIf="data.isEditOrDel!=='edit'" class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" (change)="data.pwd = $event.target.value" value="{{data.pwd}}">
+        </mat-form-field>
+        <br/>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Forename</mat-label>
+            <input matInput (change)="data.forename = $event.target.value" value="{{data.forename}}">
+        </mat-form-field>
+        <br/>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Surname</mat-label>
+            <input matInput (change)="data.surname = $event.target.value" value="{{data.surname}}">
+        </mat-form-field>
+        <br/>
+
+        <!-- <mat-form-field class="example-full-width"> -->
+            <mat-label>Role</mat-label>
+            <!-- <input matInput (change)="data.supplierName = $event.target.value" value="{{data.supplierName}}">
+        </mat-form-field>
+        <br/> -->
+        <div *ngIf="data.isEditOrDel!=='edit'">
+            <select (change)="onChangeRole($event)">
+                <option *ngFor="let role of data.roles" [value]="role" >
+                    {{role}}
+                </option>
+            </select>
+            <br />
+        </div>
+        <div *ngIf="data.isEditOrDel=='edit'">
+            <p>{{data.role}}</p>
+            <br />
+        </div>
+        <!-- <mat-form-field class="example-full-width" *ngIf="data.isEditOrDel!=='edit'">
+            <mat-label>Region</mat-label>
+            <input matInput (change)="data.supplierAddress = $event.target.value" value="{{data.supplierAddress}}">
+        </mat-form-field>
+        <br/> -->
+        <br />
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel!=='edit'" (click)="createUser(data)">Add</button>
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel=='edit'" (click)="createUser(data)">Edit</button>
+        </form>
+
+    <div *ngIf="data.isEditOrDel=='delete'">
+        <p>Are you sure you want to delete "{{data.username}}" User?</p>
+        <button (click)="createUser(data)">Yes</button>
+        <button (click)="dialogRef.close()" style="float:right">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div>
+    <div *ngIf="data && data.isEditOrDel==''">
+        <b>Add Test</b>
+    </div>
+    <div *ngIf="data && data.isEditOrDel=='edit'">
+        <b>Edit Test</b>
+    </div>
+    
+    <br/>
+    <br/>
+    <form class="example-form" *ngIf="data.isEditOrDel!=='delete'">
+            <label>Test Name</label>
+            <input matInput (change)="data.testName = $event.target.value" value="{{data.testName}}">
+        <br/>
+        <br/>
+            <label>Test Date(yyyy-mm-dd)</label>
+            <input matInput (change)="data.testDate = $event.target.value" value="{{data.testDate}}">
+        <br />
+        <br />
+        
+        <div *ngIf="data.role && data.role=='teacher' && data.isEditOrDel===''">
+        <label>Upload Test Results</label>
+        <input type="file" #fileImportInput name="File Upload" id="csvFileUpload"
+                                    (change)="fileChangeListener($event)" accept=".csv" />
+                                <button (click)="clearFile()">
+                                    Clear File Selection
+                                </button> &nbsp;
+
+        <p style="color:red" *ngIf="showErrorMsg">{{msg}}</p>
+    </div>                        
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel!=='edit'" (click)="createTest(data)">Add</button>
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel=='edit'" (click)="createTest(data)">Edit</button>
+    </form>
+
+    <div *ngIf="data && data.isEditOrDel=='delete'">
+        <p>Are you sure you want to delete "{{data.name}}" Test?</p>
+        <button (click)="createTest(data)">Yes</button>
+        <button (click)="dialogRef.close()" style="float:right">Cancel</button>
+    </div>
+</div>

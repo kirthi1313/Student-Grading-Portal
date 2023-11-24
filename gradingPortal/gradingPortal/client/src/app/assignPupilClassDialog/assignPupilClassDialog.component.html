@@ -1,0 +1,25 @@
+<div>
+    <div>
+        <b>Assign Pupil</b>
+    </div>
+    
+    <br/>
+    <br/>
+    <form class="example-form">
+            <mat-label>Choose Pupil:</mat-label>
+            <div>
+                <select [(ngModel)]="data.pupilId" name="classpupilselect">
+                    <option *ngFor="let pupil of data.pupilList" [ngValue]="pupil.id">
+                        {{pupil.username}}
+                    </option>
+                </select>
+                <br />
+            </div>
+        <br/>
+        
+        <br />
+        <button mat-raised-button class="btnAdd" (click)="assignPupilClass(data)">Assign</button>
+        <button mat-raised-button class="btnAdd" (click)="dialogRef.close()" style="float:right">Cancel</button>
+
+        </form>
+</div>

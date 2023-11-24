@@ -1,0 +1,97 @@
+<div *ngIf="showLogin" style="background-color:white;width:30%;margin:15%;padding:5%">
+  <p>New User? Click here to Register  &nbsp;<button mat-raised-button (click)="showRegister=true">Register</button></p>
+
+  <div *ngIf="showRegister">
+    Register:
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Forename</mat-label>
+        <input matInput (change)="data.foreName = $event.target.value" value="{{data.foreName}}">
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Surname</mat-label>
+        <input matInput (change)="data.surName = $event.target.value" value="{{data.surName}}">
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>User Name</mat-label>
+        <input matInput (change)="data.userName = $event.target.value" value="{{data.userName}}">
+      </mat-form-field>
+      <br />
+      <!-- <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput (change)="data.email = $event.target.value" value="{{data.email}}">
+      </mat-form-field>
+      <br /> -->
+      <div *ngIf="data.isEditOrDel!=='edit'">
+        <select (change)="onChangeRole($event)">
+            <option *ngFor="let role of data.roles" [value]="role"
+                [selected]="role">
+                {{role}}
+            </option>
+        </select>
+        <br />
+    </div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput (change)="data.pwd = $event.target.value" type="password" value="{{data.pwd}}">
+      </mat-form-field>
+      <br />
+      <p *ngIf="userMsg">User Registered Successfully!</p>
+
+      <button mat-raised-button class="btnAdd" (click)="register(data)">Register</button>
+
+      <button mat-raised-button class="btnAdd" (click)="goToLogin(data)">Go to Login</button>
+
+      
+      </form>
+  </div>
+
+  <div *ngIf="!showRegister">
+    Login:
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+          <mat-label>User ID</mat-label>
+          <input matInput (change)="data.userName = $event.target.value" value="{{data.userName}}">
+      </mat-form-field>
+      <br/>
+      <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" (change)="data.pwd = $event.target.value" value="{{data.pwd}}">
+      </mat-form-field>
+      <br/>
+      <p *ngIf="errorMsg">Invalid User Details</p>
+      <button mat-raised-button class="btnAdd" (click)="login(data)">Login</button>
+      </form>
+  </div>
+  
+</div>
+
+  <div id="navbar" *ngIf="!showLogin && !showRegister">
+    <mat-card class="headerClass">
+      <button class="btnLogOut" (click)="logOut()"><fa-icon [icon]="faSignOutAlt"></fa-icon></button>
+     
+      <p class="name">
+        <span style="font-size:45px">
+          <img style="width:100px;height:60px"
+            src="../assets/images1.png">
+           Student Grading Portal</span>
+      </p>
+    
+      <span class="tag">Welcome  !!</span>
+    
+    
+    
+    </mat-card>
+    </div>
+    
+<section  class="container" (scroll)="onWindowScroll($event);">  
+    <div class="container" *ngIf="!showLogin">
+      <div class="row col-12">
+        <router-outlet></router-outlet>
+    
+      </div>
+    </div>
+</section> 
+

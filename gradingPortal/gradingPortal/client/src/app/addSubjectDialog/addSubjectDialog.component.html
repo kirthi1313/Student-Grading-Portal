@@ -1,0 +1,39 @@
+<div>
+    <div *ngIf="data && data.isEditOrDel!=='edit' && data.isEditOrDel!=='delete'">
+        <b>Add New Subject</b>
+    </div>
+    <div *ngIf="data && data.isEditOrDel=='edit'">
+        <b>Edit Subject</b>
+    </div>
+    
+    <br/>
+    <br/>
+    <form class="example-form" *ngIf="data && data.isEditOrDel!=='delete'">
+        <!-- <mat-form-field class="example-full-width"> -->
+            <label>Subject Name</label>
+            <input matInput (change)="data.name = $event.target.value" value="{{data.name}}">
+        <!-- </mat-form-field> -->
+        <br/>
+        <!-- <mat-form-field class="example-full-width"> -->
+            <label *ngIf="data.isEditOrDel!=='delete'">Teacher</label>
+            <div *ngIf="data.isEditOrDel!=='delete'">
+                <select [(ngModel)]="data.teacherId" name="teacherselect">
+                    <option *ngFor="let teacher of data.teachers" [ngValue]="teacher.id"
+                        >
+                        {{teacher.username}}
+                    </option>
+                </select>
+                <br />
+            </div>
+        <!-- </mat-form-field> -->
+        <br />
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel!=='edit'" (click)="createSubject(data)">Add</button>
+        <button mat-raised-button class="btnAdd" *ngIf="data.isEditOrDel=='edit'" (click)="createSubject(data)">Edit</button>
+        </form>
+
+    <div *ngIf="data && data.isEditOrDel=='delete'">
+        <p>Are you sure you want to delete "{{data.name}}" Subject?</p>
+        <button (click)="createSubject(data)">Yes</button>
+        <button (click)="dialogRef.close()" style="float:right">Cancel</button>
+    </div>
+</div>

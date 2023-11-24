@@ -1,0 +1,32 @@
+<div>
+    <div>
+        <b>Create New Message</b>
+    </div>
+
+    <form class="example-form" *ngIf="data.receivers.length>0">
+        <br />
+        <label>Select User</label>
+        <div>
+            <select [(ngModel)]="data.userId" name="pupilselect">
+                <option *ngFor="let user of data.receivers" [ngValue]="user.id">
+                    {{user.username}}
+                </option>
+            </select>
+          
+        </div>
+        <br />
+        <div>
+        <label>Enter Message</label>
+        <textarea id="txtarea" name="txtarea" rows="6" cols="25" (change)="data.msg = $event.target.value" value="{{data.msg}}">
+            </textarea>
+    </div>
+        <div>
+        <button mat-raised-button class="btnAdd"
+            (click)="createMessage(data)">Send</button>
+        <button mat-raised-button class="btnAdd" (click)="dialogRef.close()" style="float:right">Cancel</button>
+    </div>
+    </form>
+    <div *ngIf="data.receivers.length==0">
+        <label>There are no users enrolled in active subjects that you are enrolled in! </label>
+    </div>
+</div>

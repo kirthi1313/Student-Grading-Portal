@@ -1,0 +1,918 @@
+CREATE TABLE Users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+forename VARCHAR(30) NOT NULL,
+surname VARCHAR(30) NOT NULL,
+username VARCHAR(50) NOT NULL,
+pwd VARCHAR(150) NOT NULL,
+role VARCHAR(25) NOT NULL
+);
+
+CREATE TABLE Class (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE PupilClass (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ pupilId int,
+ classId int,
+ FOREIGN KEY (pupilId) REFERENCES Users(id),
+ FOREIGN KEY (classId) REFERENCES Class(id));
+ 
+ CREATE TABLE Test(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+testDate DATE NOT NULL
+);
+
+CREATE TABLE PupilTest (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ pupilId int,
+ testId int,
+ grade int,
+ FOREIGN KEY (pupilId) REFERENCES Users(id),
+ FOREIGN KEY (testId) REFERENCES Test(id));
+
+CREATE TABLE Subject (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+teacherId int,
+FOREIGN KEY (teacherId) REFERENCES Users(id),
+isArchived BOOLEAN
+);
+
+CREATE TABLE PupilSubject (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ pupilId int,
+ SubjectId int,
+ FOREIGN KEY (pupilId) REFERENCES Users(id),
+ FOREIGN KEY (subjectId) REFERENCES Subject(id));
+
+CREATE TABLE SubjectClass (
+id INT AUTO_INCREMENT PRIMARY KEY,
+subjectId int,
+classId int,
+FOREIGN KEY (subjectId) REFERENCES Subject(id),
+FOREIGN KEY (classId) REFERENCES Class(id)
+);
+
+CREATE TABLE SubjectTest(
+id INT AUTO_INCREMENT PRIMARY KEY,
+subjectId int,
+testId int,    
+FOREIGN KEY (subjectId) REFERENCES Subject(id),
+FOREIGN KEY (testId) REFERENCES Test(id)
+);
+
+CREATE TABLE Message (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ senderId int,
+ receiverId int,
+ message varchar(255),
+ isRead boolean
+);
+
+ALTER TABLE `Message` ADD `date_column` DATE NOT NULL AFTER `isRead`;
+
+
+
+
+
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'admin1_forename', 'admin1_surname', 'admin1', '$2a$04$lCMOgDBwJIRkcpz66WVPG./McAcPC2p6XzSutXwKtm9DxMc8Lc1TO', 'admin');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'admin2_forename', 'admin2_surname', 'admin2', '$2a$04$bs2fFLX9TDbD3l5kJ.E3SezSD3FfR8ps4gIuRnFg9HuoAC7xYXnfO', 'admin');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil1_forename', 'pupil1_surname', 'pupil1', '$2a$04$k5Eb/g9seZ/XWyzFb0j0CujZaUjFJxfxC4U03K90IhrOPP21zH1Uu', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil2_forename', 'pupil2_surname', 'pupil2', '$2a$04$khJ2eR3E6xBEqqkqpoFtourPLvttVPMXo1ZWSuZzsDXd.JBk7ey/6', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil3_forename', 'pupil3_surname', 'pupil3', '$2a$04$YdxZ63Q1D0P3aqSdNkTwOehziV2/7cYKRiWM5ZiBKOS4bZnGz/4Ai', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil4_forename', 'pupil4_surname', 'pupil4', '$2a$04$LXpDNHvkS3y7xY4yQxzj9uwCwPgNiBoy0Bk2pCQtgz5ZN5.9nWIZi', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil5_forename', 'pupil5_surname', 'pupil5', '$2a$04$NdD19azqpsfDf2Nc1kmczujodIWPIHide8AtouPFc6aZ0q8YIBJvW', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil6_forename', 'pupil6_surname', 'pupil6', '$2a$04$vl1ncwcVLq9D1BVwsmJYFujkVfNTO3QaPCMs6t9pMs3yAKpT3.s6S', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil7_forename', 'pupil7_surname', 'pupil7', '$2a$04$FL9PPZCV3tgzEQACKqDWyuI0Rr71Qn7X0QOIKaBAPZYUkbMINA9ya', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil8_forename', 'pupil8_surname', 'pupil8', '$2a$04$0RBEW6ANVnKbG5m8C0UadO7how1tj/H5t1S/GGTpH7iaawHWNAF02', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'pupil9_forename', 'pupil9_surname', 'pupil9', '$2a$04$1mrEU/3OSZxiFMp5Z8uTBe6d4A8y52P/N2RKHk0/Gu72w40PHG0Ua', 'pupil');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'teacher1_forename', 'teacher1_surname', 'teacher1', '$2a$04$nFkDk4h/rwBy3OtG3txLX.oOIl8hVe5xUtV9IsbFX5XwT.9S2QR12', 'teacher');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'teacher2_forename', 'teacher2_surname', 'teacher2', '$2a$04$oHg5CAo6bBD2KxWgz2VbWONQ0KPUpJSgoSoC7L6YZQZcQuCh9m4Nu', 'teacher');
+INSERT INTO `Users` (`forename`, `surname`, `username`, `pwd`, `role`) VALUES ( 'teacher3_forename', 'teacher3_surname', 'teacher3', '$2a$04$AaFKSvlJXxpyqmu71Uhr7OwtqpwHh0aOj0Zff4wYX7ec.XOrAnpwi', 'teacher');
+
+
+
+INSERT INTO `Class` (`name`) VALUES ('Class A');
+INSERT INTO `Class` (`name`) VALUES ('Class B');
+
+DROP FUNCTION IF EXISTS insertPupilClass;
+DELIMITER $$
+CREATE FUNCTION insertPupilClass() RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE pid int;
+  
+    SELECT id into outid from Class where name='Class A';
+    SELECT id into pid from Users where username='pupil1';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class A';
+    SELECT id into pid from Users where username='pupil2';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class A';
+    SELECT id into pid from Users where username='pupil3';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+   SELECT id into outid from Class where name='Class A';
+    SELECT id into pid from Users where username='pupil4';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class B';
+    SELECT id into pid from Users where username='pupil5';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class B';
+    SELECT id into pid from Users where username='pupil6';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class B';
+    SELECT id into pid from Users where username='pupil7';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+    SELECT id into outid from Class where name='Class B';
+    SELECT id into pid from Users where username='pupil8';
+    INSERT INTO `PupilClass`(`classId`, `pupilId`) VALUES (outid,pid);
+    
+  RETURN outid;
+END$$
+DELIMITER ;
+
+select  insertPupilClass() as insertPupilClass;
+
+DROP FUNCTION IF EXISTS insertSubjects;
+DELIMITER $$
+CREATE FUNCTION insertSubjects() RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE cid int;
+  DECLARE sid int;
+  	SELECT id into outid from Users where username='teacher1';
+    SELECT id into cid from Class where name='Class A';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Maths',outid,false);
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+    
+    SELECT id into outid from Users where username='teacher1';
+    SELECT id into cid from Class where name='Class A';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Chemie',outid,false);
+    SELECT id into sid from Subject where name='Chemie' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+    
+    SELECT id into outid from Users where username='teacher2';
+    SELECT id into cid from Class where name='Class A';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Deutsch',outid,false);
+    SELECT id into sid from Subject where name='Deutsch' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+  RETURN outid;
+END$$
+DELIMITER ;
+
+select  insertSubjects() as insertSubjects;
+
+DROP FUNCTION IF EXISTS insertSubjectsClassB;
+DELIMITER $$
+CREATE FUNCTION insertSubjectsClassB() RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE cid int;
+  DECLARE sid int;
+  	SELECT id into outid from Users where username='teacher3';
+    SELECT id into cid from Class where name='Class B';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Economie',outid,false);
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+    
+    SELECT id into outid from Users where username='teacher1';
+    SELECT id into cid from Class where name='Class B';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Physik',outid,false);
+    SELECT id into sid from Subject where name='Chemie' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+    
+    SELECT id into outid from Users where username='teacher3';
+    SELECT id into cid from Class where name='Class B';
+    INSERT INTO `Subject`(`name`, `teacherId`, `isArchived`) VALUES ('Deutsch',outid,false);
+    SELECT id into sid from Subject where name='Deutsch' and teacherId=outid;
+	INSERT INTO `SubjectClass`(`subjectId`, `classId`) VALUES (sid,cid);
+  RETURN outid;
+END$$
+DELIMITER ;
+
+select  insertSubjectsClassB() as insertSubjectsClassB;
+
+DROP FUNCTION IF EXISTS insertTests;
+DELIMITER $$
+CREATE FUNCTION insertTests() RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE sid int;
+  DECLARE tid int;
+  	SELECT id into outid from Users where username='teacher1';
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Maths Test1','2018-7-04');
+    SELECT id into tid from Test where name='Monthly Maths Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher1';
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Maths Test2','2018-8-04');
+    SELECT id into tid from Test where name='Monthly Maths Test2';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher1';
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Maths Test3','2018-9-04');
+    SELECT id into tid from Test where name='Monthly Chemie Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher1';
+    SELECT id into sid from Subject where name='Chemie' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Chemie Test1','2018-9-04');
+    SELECT id into tid from Test where name='Monthly Chemie Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+  RETURN outid;
+END$$
+DELIMITER ;
+
+select  insertTests() as insertTests;
+
+
+DROP FUNCTION IF EXISTS insertTestsClassB;
+DELIMITER $$
+CREATE FUNCTION insertTestsClassB() RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE sid int;
+  DECLARE tid int;
+    SELECT id into outid from Users where username='teacher3';
+    SELECT id into sid from Subject where name='Economie' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Economie Test1','2018-7-04');
+    SELECT id into tid from Test where name='Monthly Economie Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher3';
+    SELECT id into sid from Subject where name='Economie' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Economie Test2','2018-8-04');
+    SELECT id into tid from Test where name='Monthly Economie Test2';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher3';
+    SELECT id into sid from Subject where name='Maths' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Physik Test3','2018-9-04');
+    SELECT id into tid from Test where name='Monthly Physik Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+    SELECT id into outid from Users where username='teacher3';
+    SELECT id into sid from Subject where name='Physik' and teacherId=outid;
+    INSERT INTO `Test`(`name`, `testDate`) VALUES ('Monthly Physik Test1','2018-9-04');
+    SELECT id into tid from Test where name='Monthly Physik Test1';
+    INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (sid,tid);
+    
+  RETURN outid;
+END$$
+DELIMITER ;
+
+select  insertTestsClassB() as insertTestsClassB;
+
+
+
+
+DROP FUNCTION IF EXISTS createUser;
+DELIMITER $$
+
+CREATE FUNCTION createUser(
+    iforename varchar(30), 
+    isurname varchar(30), 
+    iusername varchar(50), 
+    ipwd varchar(150), 
+    irole varchar(25)
+) returns int
+
+BEGIN
+DECLARE outid int;
+INSERT INTO `Users`(`forename`, `surname`, `username`, `pwd`, `role`) VALUES (iforename,isurname,iusername,ipwd,irole);
+SELECT id into outid from Users where username=iusername;
+RETURN outid;
+END $$
+
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS checkUserExists;
+DELIMITER $$
+CREATE FUNCTION checkUserExists(iuserName varchar(50), ipwd varchar(50)) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM Users WHERE userName = iuserName;
+  RETURN outid;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS getUsers;
+DELIMITER $$
+CREATE PROCEDURE getUsers()
+   BEGIN
+      select * from Users;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getEachUser;
+DELIMITER $$
+CREATE PROCEDURE getEachUser(userid int, pwd varchar(200))
+   BEGIN
+      select * from Users where id=userid;
+   END $$
+DELIMITER ;
+
+
+
+DROP FUNCTION IF EXISTS editUser;
+DELIMITER $$
+
+CREATE FUNCTION editUser(iuserid int,iforename varchar(30), 
+isurname varchar(30), 
+iusername varchar(50), 
+irole varchar(25)) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM Users WHERE id = iuserid;
+    IF outid is not null THEN
+    UPDATE Users SET forename=iforename, surname=isurname, username=iusername, role=irole WHERE id=iuserid;
+        RETURN outid;
+    END IF;
+  RETURN NULL;
+  
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteUser;
+DELIMITER $$
+
+CREATE FUNCTION deleteUser(iuserid int) RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE outrole varchar(30);
+  DECLARE cid int;
+    SELECT role INTO outrole FROM Users WHERE id = iuserid;
+    SELECT id INTO outid FROM Users WHERE id = iuserid;
+    SELECT count(id) into cid FROM Subject WHERE teacherId=iuserid;
+    IF outrole='teacher' and cid>0 THEN
+    	
+        UPDATE Subject SET teacherId=null where teacherId=iuserId;
+    	DELETE FROM Users WHERE id=iuserid;
+    else
+        DELETE FROM Users WHERE id=iuserid;
+    end if;
+   
+    RETURN outid;
+  
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS createClass;
+DELIMITER $$
+
+CREATE PROCEDURE createClass(
+    IN  iname varchar(100)
+)
+
+BEGIN
+INSERT INTO `Class`(`name`) VALUES (iname);
+END $$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS editClass;
+DELIMITER $$
+
+CREATE FUNCTION editClass(iid int,iname varchar(100)) returns int
+BEGIN
+
+  DECLARE outid int;
+    SELECT id INTO outid FROM Class WHERE id = iid;
+    IF outid is not null THEN
+    UPDATE Class SET name=iname WHERE id=iid;
+        RETURN outid;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteClass;
+DELIMITER $$
+
+CREATE FUNCTION deleteClass(iid int) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM Class WHERE id = iid;
+    IF outid is not null THEN
+    DELETE FROM Class WHERE id=iid;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getClasses;
+DELIMITER $$
+CREATE PROCEDURE getClasses()
+   BEGIN
+      select * from Class;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getPupil;
+DELIMITER $$
+CREATE PROCEDURE getPupil(iid int)
+   BEGIN
+     select * from Users where id in (select pupilId from PupilClass where classId=iid);
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getSubjects;
+DELIMITER $$
+CREATE PROCEDURE getSubjects(iid int)
+   BEGIN
+     select * from Subject where id in (select subjectId from SubjectClass where classId=iid);
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getPupilWithSubjectId;
+DELIMITER $$
+CREATE PROCEDURE getPupilWithSubjectId(iid int)
+   BEGIN
+     select * from Users where id in (select pupilId from PupilSubject where subjectId=iid);
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getTestsWithSubjectId;
+DELIMITER $$
+CREATE PROCEDURE getTestsWithSubjectId(iid int)
+   BEGIN
+     select * from Test where id in (select testId from SubjectTest where subjectId=iid);
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getTeachers;
+DELIMITER $$
+CREATE PROCEDURE getTeachers()
+   BEGIN
+      select * from Users where role='teacher';
+   END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS createSubject;
+DELIMITER $$
+
+CREATE PROCEDURE createSubject(
+    IN  iname varchar(100),
+    IN  iteacherId int,
+    IN classId int,
+    IN iisArchived boolean
+)
+
+BEGIN
+SET @subjectId = '';
+INSERT INTO `Subject`(name,teacherId,isArchived) VALUES (iname, iteacherId, iisArchived);
+SELECT LAST_INSERT_ID() INTO @subjectId;
+insert into SubjectClass (subjectId,classId) values (@subjectId, classId);
+END $$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteSubject;
+DELIMITER $$
+
+CREATE FUNCTION deleteSubject(iid int) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM Subject WHERE id = iid;
+    IF outid is not null THEN
+    delete from SubjectClass where subjectId=iid;
+    delete from SubjectTest where subjectId=iid;
+    delete from PupilSubject where subjectId=iid;
+    DELETE FROM Subject WHERE id=iid;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS assignPupil;
+DELIMITER $$
+CREATE FUNCTION assignPupil(ipupilId int,isubjectId int) returns int
+BEGIN
+declare outid int;
+INSERT INTO `PupilSubject`(`pupilId`, `SubjectId`) VALUES (ipupilId, isubjectId);
+select id into outid from PupilSubject where subjectId=isubjectId and pupilId=ipupilId;
+return outid;
+END$$
+DELIMITER;
+
+DROP PROCEDURE IF EXISTS getPupilInClass;
+DELIMITER $$
+CREATE PROCEDURE getPupilInClass(iid int)
+   BEGIN
+     select * from Users p inner join PupilClass pc where pc.classId=iid and p.id=pc.pupilId;
+   END $$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deassignPupil;
+DELIMITER $$
+CREATE FUNCTION deassignPupil(ipupilId int,isubjectId int) returns int
+BEGIN
+declare outid int;
+delete from `PupilSubject` where subjectId=isubjectId and pupilId=ipupilId;
+return outid;
+END$$
+DELIMITER;
+
+DROP PROCEDURE IF EXISTS createTest;
+DELIMITER $$
+
+CREATE PROCEDURE createTest(
+    IN  isubjectId int,
+    IN  iname varchar(100),
+IN itestDate date
+)
+
+BEGIN
+declare itestId int;
+INSERT INTO `Test`(`name`,`testDate`) VALUES (iname, itestDate);
+SELECT id  into itestId from Test where name=iname and testDate=itestDate;
+INSERT INTO `SubjectTest`(`subjectId`, `testId`) VALUES (isubjectId, itestId);
+
+END $$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS editTest;
+DELIMITER $$
+
+CREATE FUNCTION editTest(iid int,iname varchar(100),itestDate date) returns int
+BEGIN
+
+  DECLARE outid int;
+  DECLARE subjectId int;
+    SELECT id INTO outid FROM Test WHERE id = iid;
+    IF outid is not null THEN
+    
+    UPDATE Test SET name=iname, testDate=itestDate WHERE id=iid;
+    
+    END IF;
+    
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteTest;
+DELIMITER $$
+
+CREATE FUNCTION deleteTest(iid int) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM Test WHERE id = iid;
+    IF outid is not null THEN
+    delete from SubjectTest where testId=iid;
+    delete from PupilTest where testId=iid;
+    DELETE FROM Test WHERE id=iid;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS assignPupilClass;
+DELIMITER $$
+CREATE FUNCTION assignPupilClass(ipupilId int,iclassId int) returns int
+BEGIN
+declare outid int;
+declare checkId int;
+SELECT id INTO checkId FROM PupilClass WHERE pupilId = ipupilId;
+if checkId is not null THEN
+delete from PupilClass where id=checkId;
+end if;
+INSERT INTO `PupilClass`(`pupilId`, `classId`) VALUES (ipupilId, iclassId);
+select id into outid from PupilClass where classId=iclassId and pupilId=ipupilId;
+return outid;
+END$$
+DELIMITER;
+
+DROP FUNCTION IF EXISTS deassignPupilClass;
+DELIMITER $$
+CREATE FUNCTION deassignPupilClass(ipupilId int,iclassId int) returns int
+BEGIN
+declare outid int;
+delete from `PupilClass` where classId=iclassId and pupilId=ipupilId;
+return outid;
+END$$
+DELIMITER;
+
+DROP PROCEDURE IF EXISTS getTestResultById;
+DELIMITER $$
+CREATE PROCEDURE getTestResultById(itestId int)
+   BEGIN
+      select * from PupilTest pt join Users u join Test t where pt.testId=itestId and pt.pupilId=u.id and pt.testId=t.id;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS createTestResult;
+DELIMITER $$
+
+CREATE PROCEDURE createTestResult(
+    IN  itestName varchar(255),
+    IN ipupilName varchar(255),
+    IN igrade int
+)
+
+BEGIN
+declare itestId int;
+declare chkId int;
+DECLARE ipupilId int default null;
+
+
+SELECT id into itestId from Test where name=itestName;
+SELECT id into ipupilId from Users where username=ipupilName;
+
+select id into chkId from PupilTest where testId=itestId and pupilId=ipupilId;
+
+if itestId is not null and ipupilId is not null then
+
+if chkId is not null then
+update PupilTest set grade=igrade where pupilId=ipupilId and testId=itestId;
+else 
+INSERT INTO `PupilTest`(`pupilId`,`testId`,`grade`) VALUES (ipupilId, itestId, igrade);
+end if;
+
+end if;
+END $$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteTestResult;
+DELIMITER $$
+
+CREATE FUNCTION deleteTestResult(ipupilId int,itestId int) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM PupilTest WHERE pupilId = ipupilId and testId = itestId;
+    IF outid is not null THEN
+    delete from PupilTest WHERE pupilId = ipupilId and testId = itestId;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pupilTestResultById;
+DELIMITER $$
+CREATE PROCEDURE pupilTestResultById(iid int)
+   BEGIN
+      select t.name as testName,s.name as subjectName,s.id as subjectId,u.id as pupilId,pt.grade as grade from Users u join PupilTest pt join SubjectTest ps join Subject s join Test t where u.id=iid and pt.pupilId=iid and ps.testId=pt.testId and s.id=ps.subjectId and t.id=pt.testId;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pupilTestResultBySubject;
+DELIMITER $$
+CREATE PROCEDURE pupilTestResultBySubject(iid int,isubjectId int)
+   BEGIN
+      select t.name as testName, s.name as subjectName, pt.grade as grade from Users u join PupilSubject ps join SubjectTest st join PupilTest pt join Test t join Subject s where u.id=iid and ps.subjectId=isubjectId and ps.PupilId=u.id and st.subjectId=ps.subjectId and pt.testId=st.testId and pt.pupilId=u.id and t.id=pt.testId and s.id=st.subjectId ;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getSubjectsByTeacherId;
+DELIMITER $$
+CREATE PROCEDURE getSubjectsByTeacherId(iid int)
+   BEGIN
+   select s.id as subjectId, t.id as testId,c.name as className, s.name as subjectName, t.name as testName,t.testDate as testDate, u.username as pupilName, pt.grade as grade from Subject s join SubjectTest st join PupilTest pt join Test t join Users u join SubjectClass sc join Class c where s.teacherId=iid and st.subjectId=s.id and st.testId=pt.testId and st.testId=t.id and pt.pupilId=u.id and sc.subjectId=s.id and c.id=sc.classId;
+      
+   END $$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS editTestResultByPupilId;
+DELIMITER $$
+
+CREATE FUNCTION editTestResultByPupilId(iid int,itestId int,igrade int) returns int
+BEGIN
+
+  DECLARE outid int;
+    SELECT id INTO outid FROM Test WHERE id = itestId;
+    IF outid is not null THEN
+    
+    UPDATE PupilTest SET grade=igrade WHERE pupilId=iid and testId=itestId;
+    
+    END IF;
+    
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteTestAndResult;
+DELIMITER $$
+
+CREATE FUNCTION deleteTestAndResult(itestId int) RETURNS int
+BEGIN
+  DECLARE outid int;
+    SELECT id INTO outid FROM PupilTest WHERE testId = itestId;
+    IF outid is not null THEN
+    delete from SubjectTest WHERE testId = itestId;
+    delete from PupilTest WHERE testId = itestId;
+    delete from Test where id=itestId;
+    ELSE
+    delete from SubjectTest WHERE testId = itestId;
+    delete from Test where id=itestId;
+    END IF;
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getAllClassDetails;
+DELIMITER $$
+CREATE PROCEDURE getAllClassDetails()
+   BEGIN
+  select c.name as className,s.name as subjectName, t.name as testName,t.testDate as testDate from Class c inner join SubjectClass sc inner join Subject s inner join SubjectTest st inner join Test t where sc.classId=c.id
+  and s.id=sc.subjectId and st.subjectId=s.id and t.id=st.testId;
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS createMessage;
+DELIMITER $$
+
+CREATE PROCEDURE createMessage(
+    IN  isenderId int,
+    IN ireceiverId int,
+    IN imessage VARCHAR(1000)
+)
+
+BEGIN
+INSERT INTO `Message`(`senderId`,`receiverId`,`message`,`isRead`,`date_column`) VALUES (isenderId, ireceiverId, imessage,false,now());
+END $$
+
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS markMessageAsRead;
+DELIMITER $$
+CREATE FUNCTION markMessageAsRead(iid int) returns int
+BEGIN
+
+  DECLARE outid int;
+    SELECT id INTO outid FROM Message WHERE id = iid;
+    IF outid is not null THEN
+    
+    UPDATE Message SET isRead=1 where id=iid;
+   
+    RETURN outid;
+    END IF;    
+  RETURN NULL;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getMessageUsersForPupil;
+DELIMITER $$
+CREATE PROCEDURE getMessageUsersForPupil(iid int)
+   BEGIN
+ select * from Users where id in (select pupilId from PupilSubject where subjectId in (select id from Subject where id in(select subjectId from PupilSubject where pupilId=iid) and (isArchived is null or isArchived<1)));
+   END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getMessageUsersForTeacher;
+DELIMITER $$
+CREATE PROCEDURE getMessageUsersForTeacher(iid int)
+   BEGIN
+select * from Users where role="teacher" or role="admin" or id in (select pupilId from PupilSubject where subjectId in (select id from Subject where teacherId=iid and (isArchived is null or isArchived<1)));
+   END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS getMessages;
+DELIMITER $$
+CREATE PROCEDURE getMessages(iid int)
+   BEGIN
+ select m.id as messageId, m.receiverId, m.senderId, m.message, m.date_column, m.isRead, u.username  from Message m join Users u where m.receiverId=iid and u.id=m.senderId;
+   END $$
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS deleteUser;
+DELIMITER $$
+
+CREATE FUNCTION deleteUser(iuserid int) RETURNS int
+BEGIN
+  DECLARE outAssignedSubjects int;
+    
+    IF (SELECT role FROM Users WHERE id = iuserid)='teacher' THEN
+    	SELECT count(id) INTO outAssignedSubjects FROM Subject where id=iuserid and isArchived=0;
+    	IF (outAssignedSubjects=0) then
+    		DELETE FROM Users WHERE id=iuserid;
+    	END IF;
+    ELSEIF (SELECT role FROM Users WHERE id = iuserid)='pupil' then
+	delete from PupilTest where pupilId=iuserid;
+	delete from PupilClass where pupilId=iuserid;
+	delete from PupilSubject where pupilId=iuserid;
+	DELETE FROM Users WHERE id=iuserid;
+    END IF;
+    
+  RETURN NULL;
+  
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS deleteClass;
+DELIMITER $$
+
+CREATE FUNCTION deleteClass(iid int) RETURNS int
+BEGIN
+  DECLARE outid int;
+  DECLARE outPupilClassId int;
+  DECLARE outSubjectClassId int;
+  DECLARE outiid int;
+
+    SELECT id INTO outid FROM Class WHERE id = iid;
+    SELECT id INTO outPupilClassId FROM PupilClass WHERE classId = iid;
+    SELECT id INTO outSubjectClassId FROM SubjectClass WHERE classId = iid;
+
+    IF outSubjectClassId is not null THEN
+    DELETE FROM SubjectClass WHERE subjectId in (SELECT s.id FROM SubjectClass sc inner join Subject s WHERE sc.classId=iid and s.id=sc.subjectId and (s.isArchived is null or s.isArchived=0));
+    DELETE FROM Subject WHERE id in (select subjectId FROM SubjectTest WHERE subjectId in (select s.id FROM SubjectClass sc inner join Subject s WHERE sc.classId=iid and s.id=sc.subjectId and (s.isArchived is null or s.isArchived=0)));    
+    END IF;
+    IF outPupilClassId is not null THEN
+    DELETE FROM PupilClass WHERE classId=iid;
+    END IF;
+    IF outid is not null THEN
+    DELETE FROM Class WHERE id=iid;
+    END IF;
+    
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS archiveSubject;
+DELIMITER $$
+CREATE FUNCTION archiveSubject(iid int) returns int
+BEGIN
+
+  DECLARE outtestid int;
+    
+    SELECT count(id) INTO outtestid FROM SubjectTest WHERE subjectId = iid;
+    
+    IF (outtestid>0) THEN
+    
+    UPDATE Subject SET isArchived=1 where id=iid;
+    RETURN outtestid;
+    
+    ELSE 
+    RETURN NULL;
+    END IF;    
+
+END$$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS editSubject;
+
+DELIMITER $$
+
+CREATE FUNCTION editSubject(iid int,iname varchar(100),iteacherId int) returns int
+BEGIN
+
+  DECLARE outid int;
+  DECLARE subjectId int;
+    SELECT id INTO outid FROM Subject WHERE id = iid;
+    select id into subjectId from Subject where teacherId = iteacherId;
+    IF outid is not null THEN
+    
+    UPDATE Subject SET name=iname, teacherId=iteacherId WHERE id=iid;
+    if subjectId is not null and outid<>subjectId THEN
+      update Subject set teacherId=null where id= subjectId;     
+    end if;
+        RETURN outid;
+    END IF;
+    
+  RETURN NULL;
+ 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE EVENT delete_records
+ON SCHEDULE EVERY 1 DAY
+COMMENT 'Event deletes some records.'
+DO
+BEGIN
+DELETE FROM Message WHERE DATEDIFF(NOW(), date_column) >= 7;
+END $$
+
+DELIMITER ;
+

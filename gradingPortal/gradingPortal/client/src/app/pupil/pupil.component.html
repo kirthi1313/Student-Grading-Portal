@@ -1,0 +1,97 @@
+<div class="container">
+    <div>
+        <p class="underline" (click)="downloadFile()">Export To CSV</p>
+        <mat-icon class="msgClass" matBadge="{{unreadMsgCt}}" (click)="showMessages()" matBadgeColor="warn">
+            <fa-icon [icon]="faCommentAlt"></fa-icon>
+        </mat-icon>
+        <button style="float:right; margin-right: 0px;margin-top: 12px;" (click)="addMessage(userId)">
+            New Message
+        </button>
+        <p *ngIf="isMessageView" (click)="isMessageView=false">Back</p>
+    </div>
+    <div *ngIf="!isMessageView">
+        <div style="float:left;margin-top: 60px;">
+            <table mat-table [dataSource]="dataSource" class="tablecontainer mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="subjectName">
+                    <th mat-header-cell *matHeaderCellDef> Subject Name </th>
+                    <td mat-cell *matCellDef="let element" (click)="showSubjectDetails(element)">
+                        {{element.subjectName}}
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="testName">
+            <th mat-header-cell *matHeaderCellDef>Test Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.testName}} </td>
+        </ng-container> -->
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="totGrade">
+                    <th mat-header-cell *matHeaderCellDef>Average Grade </th>
+                    <td mat-cell *matCellDef="let element"> {{element.totGrade/element.count}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div style="float:right;">
+            <table mat-table *ngIf="showTests" [dataSource]="dataSrc" class="tablecont mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="testName">
+                    <th mat-header-cell *matHeaderCellDef> Test Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testName}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="grade">
+                    <th mat-header-cell *matHeaderCellDef> Grade </th>
+                    <td mat-cell *matCellDef="let element"> {{element.grade}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedCols"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedCols;"></tr>
+            </table>
+        </div>
+        <div *ngIf="showTests && !dataSrc.length" style="float:right;">
+           <p style="padding-right:300px">No tests found!</p>
+        </div>
+    </div>
+
+    <div *ngIf="isMessageView && dataSourceMsg.length>0" style="float:left;">
+        <p *ngIf="isMessageView" class="inbox" >Message Inbox</p>
+        <table mat-table [dataSource]="dataSourceMsg" class="tablecontainermsg mat-elevation-z8">
+            <ng-container matColumnDef="from">
+                <th mat-header-cell *matHeaderCellDef>From </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateSent">
+                <th mat-header-cell *matHeaderCellDef>Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date_column}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="message">
+                <th mat-header-cell *matHeaderCellDef>Message </th>
+                <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="read">
+                <th mat-header-cell *matHeaderCellDef>Read</th>
+                <td mat-cell *matCellDef="let element" (click)="markAsRead(element)">
+                    <button *ngIf="element.isRead==0" mat-raised-button class="btnAdd"
+                        style="background-color:rgb(73, 71, 71); color:white">Read</button>
+                        <p *ngIf="element.isRead!=0" style="color:green;font-weight:bold; font-size: large;">✓</p>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsMsg"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsMsg;"></tr>
+        </table>
+    </div>
+
+    <div *ngIf="isMessageView && dataSourceMsg.length==0"
+        style="background-color:white;color:black;float:left;margin-top: 60px;">
+        <p *ngIf="isMessageView" class="inbox" >Message Inbox</p>
+
+        <p>No messages found!</p>
+    </div>
+</div>
