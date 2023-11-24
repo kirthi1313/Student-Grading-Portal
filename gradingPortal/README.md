@@ -3,8 +3,8 @@
 A grading portal to update students grade and maintain them. 
 
 The application is developed using the following technologies:
-Angular 11,HTML5,CSS,Typescript - Frontend
-NodeJS - Server side/backend
+* Angular 11,HTML5,CSS,Typescript - Frontend
+* NodeJS - Server side/backend
 
 ## Getting Started
 
