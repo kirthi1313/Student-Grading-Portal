@@ -1,8 +1,4 @@
-# Project Title
-
-Student Grading Portal
-
-## Description
+# Student Grading Portal
 
 A grading portal to update students grade and maintain them. 
 
